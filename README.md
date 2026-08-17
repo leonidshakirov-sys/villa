@@ -48,6 +48,16 @@ npm start
 - `house-kitchen-01.webp`
 - `house-bathroom-01.webp`
 - `house-bathroom-02.webp`
+- `house-living-01.webp`
+- `house-bedroom-01.webp`
+- `house-bedroom-02.webp`
+- `house-hallway-01.webp`
+- `house-stairs-02.webp`
+- `house-boiler-01.webp`
+- `house-laundry-01.webp`
+- `house-cinema-01.webp`
+- `house-wardrobe-01.webp`
+- `house-recreation-01.webp`
 - `floor-basement.webp`, `floor-1.webp`, `floor-2.webp`, `floor-upper.webp`
 - `location-shops-01.webp`, `location-shops-02.webp`, `location-sports-01.webp`
 
