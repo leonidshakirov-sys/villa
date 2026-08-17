@@ -1,0 +1,82 @@
+---
+import { property } from "../config/property";
+import { formatPrice } from "../lib/format";
+
+const stats = [
+  { value: property.areaLabel, label: "Площадь дома" },
+  { value: property.landAreaLabel, label: "Площадь участка" },
+  { value: String(property.floors), label: "Этажа" },
+  { value: String(property.yearBuilt), label: "Год постройки" },
+];
+
+if (typeof property.price === "number") {
+  stats.push({ value: formatPrice(property.price), label: "Цена" });
+}
+---
+
+<section class="stats" aria-label="Ключевые характеристики">
+  <div class="container-wide grid">
+    {
+      stats.map((stat) => (
+        <div class="stat">
+          <strong>{stat.value}</strong>
+          <span>{stat.label}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .stats {
+    border-block: 1px solid var(--color-line);
+    background: var(--color-white);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.25rem 1rem;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .stat:nth-child(2n) {
+    border-right: 0;
+  }
+
+  strong {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  span {
+    color: var(--color-stone);
+    font-size: 0.86rem;
+  }
+
+  @media (min-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    }
+
+    .stat,
+    .stat:nth-child(2n) {
+      border-right: 1px solid var(--color-line);
+      border-bottom: 0;
+      padding: 1.6rem 1.2rem;
+    }
+
+    .stat:last-child {
+      border-right: 0;
+    }
+  }
+</style>

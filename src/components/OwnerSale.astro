@@ -1,0 +1,50 @@
+---
+import ActionButtons from "./ActionButtons.astro";
+import { getTelUrl, property } from "../config/property";
+import { formatPrice } from "../lib/format";
+
+const price = typeof property.price === "number" ? formatPrice(property.price) : null;
+---
+
+<section class="section owner-sale" id="owner" aria-labelledby="owner-title">
+  <div class="container panel">
+    <p class="eyebrow">Без посредников</p>
+    <h2 id="owner-title">Продажа напрямую от собственника</h2>
+    <p class="lead">
+      Без посредников и комиссии агентства. Можно напрямую задать вопросы по дому и договориться о просмотре.
+    </p>
+    <div class="contact">
+      <p class="name">{property.ownerName}</p>
+      <a class="phone-link phone" href={getTelUrl()} data-analytics="click_phone">{property.phone}</a>
+      {price && <p class="price">{price}</p>}
+    </div>
+    <ActionButtons />
+  </div>
+</section>
+
+<style>
+  .panel {
+    display: grid;
+    gap: 1.1rem;
+    padding: var(--space-7) 0;
+  }
+
+  h2 {
+    max-width: 14ch;
+    font-size: var(--text-5xl);
+  }
+
+  .name {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+  }
+
+  .phone {
+    display: inline-block;
+    margin: 0.2rem 0 0.4rem;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+</style>

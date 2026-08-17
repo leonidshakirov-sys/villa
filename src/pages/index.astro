@@ -1,0 +1,38 @@
+---
+import About from "../components/About.astro";
+import Advantages from "../components/Advantages.astro";
+import FinalCta from "../components/FinalCta.astro";
+import FloorPlans from "../components/FloorPlans.astro";
+import Footer from "../components/Footer.astro";
+import Gallery from "../components/Gallery.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import KeyStats from "../components/KeyStats.astro";
+import Location from "../components/Location.astro";
+import MobileCta from "../components/MobileCta.astro";
+import OwnerCta from "../components/OwnerCta.astro";
+import OwnerSale from "../components/OwnerSale.astro";
+import SeoText from "../components/SeoText.astro";
+import Specs from "../components/Specs.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Header />
+  <main id="main">
+    <Hero />
+    <KeyStats />
+    <Gallery />
+    <About />
+    <OwnerCta />
+    <Specs />
+    <Advantages />
+    <FloorPlans />
+    <Location />
+    <OwnerSale />
+    <SeoText />
+    <FinalCta />
+  </main>
+  <Footer />
+  <MobileCta />
+</BaseLayout>

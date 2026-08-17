@@ -1,0 +1,122 @@
+---
+import { getWhatsAppUrl, property } from "../config/property";
+import { getSiteUrl } from "../config/site";
+import { publicFileExists } from "../lib/files";
+
+const siteUrl = getSiteUrl();
+const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
+const availableImages = property.images
+  .filter((image) => publicFileExists(image.src) || publicFileExists(image.src.replace(/\.webp$/, ".jpg")))
+  .map((image) => new URL(image.src, siteUrl).href);
+
+const ogFallback = new URL("/og-image.svg", siteUrl).href;
+const images = availableImages.length > 0 ? availableImages : [ogFallback];
+
+const house: Record<string, unknown> = {
+  "@type": "House",
+  name: property.title,
+  description: property.seoDescription,
+  url: pageUrl,
+  image: images,
+  floorSize: {
+    "@type": "QuantitativeValue",
+    value: property.area,
+    unitCode: "MTK",
+  },
+  numberOfFloors: property.floors,
+  yearBuilt: String(property.yearBuilt),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "деревня Житнево",
+    addressRegion: "Московская область",
+    addressCountry: "RU",
+    streetAddress: property.showExactAddress ? "улица Колхозная, 8" : undefined,
+  },
+  amenityFeature: [
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Центральные коммуникации",
+      value: true,
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Гараж",
+      value: true,
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Помещение под сауну",
+      value: true,
+    },
+  ],
+};
+
+if (property.landArea) {
+  house.lotSize = {
+    "@type": "QuantitativeValue",
+    value: Math.round(property.landArea * 100),
+    unitCode: "MTK",
+  };
+}
+
+const offer: Record<string, unknown> = {
+  "@type": "Offer",
+  url: pageUrl,
+  availability: "https://schema.org/InStock",
+  businessFunction: "http://purl.org/goodrelations/v1#Sell",
+  seller: {
+    "@type": "Person",
+    name: property.ownerName,
+    telephone: `+${property.phoneRaw}`,
+    url: getWhatsAppUrl(),
+  },
+  itemOffered: {
+    "@id": `${pageUrl}#house`,
+  },
+};
+
+if (typeof property.price === "number" && property.price > 0) {
+  offer.price = property.price;
+  offer.priceCurrency = "RUB";
+}
+
+const data = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: property.title,
+      url: siteUrl,
+      inLanguage: "ru-RU",
+    },
+    {
+      "@type": "RealEstateListing",
+      name: property.h1,
+      description: property.seoDescription,
+      url: pageUrl,
+      image: images,
+      inLanguage: "ru-RU",
+      about: { "@id": `${pageUrl}#house` },
+      offers: offer,
+    },
+    {
+      "@id": `${pageUrl}#house`,
+      ...house,
+    },
+    {
+      "@type": "Person",
+      name: property.ownerName,
+      jobTitle: "Собственник",
+      telephone: `+${property.phoneRaw}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "деревня Житнево",
+        addressRegion: "Московская область",
+        addressCountry: "RU",
+      },
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

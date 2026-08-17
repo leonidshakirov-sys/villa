@@ -1,0 +1,26 @@
+{
+  "name": "zhitnevo-house",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Одностраничный сайт продажи дома в Житнево от собственника",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.2",
+    "@fontsource/cormorant-garamond": "^5.2.5",
+    "@fontsource/manrope": "^5.2.5",
+    "astro": "^5.12.9"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.2"
+  }
+}

@@ -1,0 +1,46 @@
+---
+import ActionButtons from "./ActionButtons.astro";
+import { getTelUrl, property } from "../config/property";
+import { formatPrice } from "../lib/format";
+
+const price = typeof property.price === "number" ? formatPrice(property.price) : null;
+---
+
+<section class="section owner-cta" aria-labelledby="owner-cta-title">
+  <div class="container card">
+    <p class="eyebrow">Прямой контакт</p>
+    <h2 id="owner-cta-title">Есть вопросы по дому? Позвоните собственнику напрямую.</h2>
+    <p class="who">
+      <strong>{property.ownerName}</strong>
+      <a class="phone-link" href={getTelUrl()} data-analytics="click_phone">{property.phone}</a>
+    </p>
+    {price && <p class="price">{price}</p>}
+    <ActionButtons callLabel="Позвонить" whatsappLabel="WhatsApp" />
+  </div>
+</section>
+
+<style>
+  .card {
+    display: grid;
+    gap: 1rem;
+    padding: var(--space-6);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    background: var(--color-white);
+  }
+
+  h2 {
+    max-width: 18ch;
+    font-size: var(--text-3xl);
+  }
+
+  .who {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .who a {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+</style>

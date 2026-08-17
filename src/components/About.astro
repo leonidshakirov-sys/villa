@@ -1,0 +1,56 @@
+---
+import { property } from "../config/property";
+---
+
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <div>
+      <p class="eyebrow">О доме</p>
+      <h2 id="about-title">Просторный дом для постоянного проживания</h2>
+    </div>
+    <div class="copy">
+      <p>
+        Дом расположен в деревне Житнево Домодедовского городского округа Московской области.
+      </p>
+      <p>
+        Общая площадь дома с верандой составляет {property.areaLabel}. Площадь земельного участка — {property.landAreaLabel}.
+      </p>
+      <p>
+        Дом построен в {property.yearBuilt} году и состоит из четырех этажей. Такой формат дает достаточно пространства для большой семьи и позволяет организовать отдельные жилые, гостевые, рабочие и хозяйственные зоны.
+      </p>
+      <p>К дому подключены центральные коммуникации.</p>
+      <p>
+        На территории дома предусмотрен гараж. Также имеется помещение под сауну. Эти помещения требуют завершения работ, поэтому новый собственник сможет закончить их с учетом собственных предпочтений.
+      </p>
+      <p>Дом находится ориентировочно в 35 км от МКАД.</p>
+      <p>Продажа осуществляется напрямую от собственника.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  h2 {
+    max-width: 14ch;
+    font-size: var(--text-4xl);
+  }
+
+  .copy {
+    display: grid;
+    gap: 1rem;
+    max-width: 40rem;
+    color: var(--color-graphite);
+    font-size: 1.05rem;
+  }
+
+  @media (min-width: 900px) {
+    .about-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+</style>
