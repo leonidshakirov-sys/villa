@@ -72,8 +72,31 @@ export const property = {
   seo: {
     title: "Дом в Житнево 281,5 м² — купить дом от собственника",
     description:
-      "Продается дом 281,5 м² на участке 11,86 соток в Житнево, Домодедово. 4 этажа, центральные коммуникации, гараж. Продажа от собственника.",
+      "Продается дом 281,5 м² на участке 11,86 соток в Житнево, Домодедово. Реконструкция 2021, центральные коммуникации, гараж. Продажа от собственника.",
   },
+
+  reconstructionYear: 2021,
+  underfloorHeating: "цокольный и первый этажи",
+  boilers: "два котла Viessmann",
+  alarm: "сигнализация с датчиками движения",
+  wifi: true,
+  saleTerms: [
+    "Свободная продажа",
+    "Один взрослый собственник",
+    "Никто не зарегистрирован",
+    "Полная стоимость указывается в договоре",
+    "Без комиссии агентства со стороны собственника",
+  ],
+  nearby: [
+    "школа",
+    "детский сад",
+    "магазины",
+    "кафе",
+    "автобусная остановка",
+    "футбольное поле",
+    "детские площадки",
+    "спортивные площадки",
+  ],
 
   // Публичная точка карты — центр деревни, не точный номер дома.
   map: {
@@ -220,14 +243,53 @@ export const property = {
       height: 1067,
       available: false,
     },
+    {
+      id: "kitchen-01",
+      src: "/images/house/house-kitchen-01.webp",
+      alt: "Кухня-гостиная в доме в Житнево",
+      category: "interior",
+      categoryLabel: "Кухня-гостиная",
+      width: 1600,
+      height: 1067,
+      available: false,
+    },
+    {
+      id: "bathroom-01",
+      src: "/images/house/house-bathroom-01.webp",
+      alt: "Ванная комната в доме в Житнево",
+      category: "interior",
+      categoryLabel: "Ванная",
+      width: 1600,
+      height: 1067,
+      available: false,
+    },
+    {
+      id: "bathroom-02",
+      src: "/images/house/house-bathroom-02.webp",
+      alt: "Санузел второго этажа дома в Житнево",
+      category: "interior",
+      categoryLabel: "Ванная",
+      width: 1600,
+      height: 1067,
+      available: false,
+    },
   ] satisfies PropertyImage[],
 
   floorPlans: [
     {
+      id: "floor-basement",
+      title: "Цокольный этаж",
+      src: "/images/plans/floor-basement.webp",
+      alt: "Технический план цокольного этажа дома в Житнево",
+      width: 1600,
+      height: 1200,
+      available: false,
+    },
+    {
       id: "floor-1",
       title: "1 этаж",
       src: "/images/plans/floor-1.webp",
-      alt: "План первого этажа дома в Житнево",
+      alt: "Технический план первого этажа дома в Житнево",
       width: 1600,
       height: 1200,
       available: false,
@@ -236,30 +298,54 @@ export const property = {
       id: "floor-2",
       title: "2 этаж",
       src: "/images/plans/floor-2.webp",
-      alt: "План второго этажа дома в Житнево",
+      alt: "Технический план второго этажа дома в Житнево",
       width: 1600,
       height: 1200,
       available: false,
     },
     {
-      id: "floor-3",
-      title: "3 этаж",
-      src: "/images/plans/floor-3.webp",
-      alt: "План третьего этажа дома в Житнево",
-      width: 1600,
-      height: 1200,
-      available: false,
-    },
-    {
-      id: "floor-4",
-      title: "4 этаж",
-      src: "/images/plans/floor-4.webp",
-      alt: "План четвёртого этажа дома в Житнево",
+      id: "floor-upper",
+      title: "Верхний этаж",
+      src: "/images/plans/floor-upper.webp",
+      alt: "Технический план верхнего этажа дома в Житнево",
       width: 1600,
       height: 1200,
       available: false,
     },
   ] satisfies FloorPlan[],
+
+  locationImages: [
+    {
+      id: "shops-01",
+      src: "/images/location/location-shops-01.webp",
+      alt: "Магазины рядом с Житнево в Домодедовском округе",
+      category: "shops",
+      categoryLabel: "Магазины рядом",
+      width: 1600,
+      height: 1067,
+      available: false,
+    },
+    {
+      id: "shops-02",
+      src: "/images/location/location-shops-02.webp",
+      alt: "Торговый центр и сервисы рядом с домом в Житнево",
+      category: "shops",
+      categoryLabel: "Инфраструктура рядом",
+      width: 1600,
+      height: 1067,
+      available: false,
+    },
+    {
+      id: "sports-01",
+      src: "/images/location/location-sports-01.webp",
+      alt: "Спортивные площадки и футбольное поле в Житнево",
+      category: "sports",
+      categoryLabel: "Спорт рядом",
+      width: 1600,
+      height: 1067,
+      available: false,
+    },
+  ] satisfies PropertyImage[],
 };
 
 export function getWhatsAppUrl() {
@@ -270,6 +356,10 @@ export function getWhatsAppUrl() {
 
 export function getTelUrl() {
   return `tel:+${property.phoneRaw}`;
+}
+
+export function isImageReady(image: { src: string; available: boolean }) {
+  return image.available;
 }
 
 export function getHeroImage() {

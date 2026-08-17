@@ -504,9 +504,70 @@ button {
 }
 
 .about-grid,
-.location-grid {
+.location-grid,
+.reconstruction-grid,
+.land-grid,
+.nearby-grid {
   display: grid;
   gap: var(--space-6);
+}
+
+.about-price {
+  margin-top: var(--space-4);
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.plain-list {
+  margin: 1rem 0;
+  padding-left: 1.15rem;
+  color: var(--color-ink-soft);
+}
+
+.plain-list li + li {
+  margin-top: 0.35rem;
+}
+
+.floors-list {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.floor-card {
+  background: var(--color-paper);
+  border: 1px solid var(--color-stone);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.floor-card h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.floor-card p + p,
+.floor-card ul + p {
+  margin-top: 0.85rem;
+}
+
+.nearby-photos {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.nearby-photo {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-stone);
+}
+
+.sale-terms {
+  max-width: 28rem;
+  margin-inline: auto;
+  text-align: left;
 }
 
 .owner-cta-card,
@@ -793,8 +854,19 @@ button {
 
   .about-grid,
   .location-grid,
+  .reconstruction-grid,
+  .land-grid,
+  .nearby-grid,
   .footer-grid {
     grid-template-columns: 1fr 1.2fr;
+  }
+
+  .floors-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nearby-photos {
+    grid-template-columns: 1fr;
   }
 
   .site-footer {

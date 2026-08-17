@@ -45,6 +45,21 @@ export function getJsonLd() {
         name: "Помещение под сауну",
         value: true,
       },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Теплый пол",
+        value: true,
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Сигнализация",
+        value: true,
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Wi-Fi",
+        value: true,
+      },
     ],
   };
 

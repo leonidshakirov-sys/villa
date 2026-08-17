@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { property } from "@/config/property";
+import { isImageReady, property } from "@/config/property";
 import { Lightbox } from "@/components/Lightbox";
 import { Photo } from "@/components/Photo";
 import { track } from "@/lib/analytics";
@@ -42,7 +42,7 @@ export function Gallery() {
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                available={image.available}
+                available={isImageReady(image)}
                 label={image.categoryLabel}
                 priority={imageIndex === 0}
                 sizes={
@@ -69,7 +69,7 @@ export function Gallery() {
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                available={image.available}
+                available={isImageReady(image)}
                 label={image.categoryLabel}
                 sizes="80vw"
               />
@@ -88,7 +88,7 @@ export function Gallery() {
           alt: image.alt,
           width: image.width,
           height: image.height,
-          available: image.available,
+          available: isImageReady(image),
           label: image.categoryLabel,
         }))}
         index={index}

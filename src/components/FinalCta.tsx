@@ -30,7 +30,8 @@ export function FinalCta() {
         <p className="eyebrow light">Просмотр</p>
         <h2>Лучше один раз увидеть</h2>
         <p className="final-lead">
-          Позвоните Леониду и договоритесь о просмотре дома в Житнево.
+          Масштаб комнат, веранду и участок лучше оценить на месте. Позвоните
+          Леониду и договоритесь о просмотре дома в Житнево.
         </p>
         <p className="owner-name light">
           {property.ownerName} — {property.ownerRole}

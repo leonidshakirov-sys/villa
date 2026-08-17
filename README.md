@@ -26,6 +26,10 @@ npm start
 
 `public/images/plans/`
 
+Фото инфраструктуры рядом:
+
+`public/images/location/`
+
 Рекомендуемые имена файлов уже прописаны в `src/config/property.ts`:
 
 - `house-exterior-01.webp`
@@ -41,15 +45,19 @@ npm start
 - `house-garage-01.webp`
 - `house-sauna-01.webp`
 - `house-surroundings-01.webp`
-- `floor-1.webp` … `floor-4.webp`
+- `house-kitchen-01.webp`
+- `house-bathroom-01.webp`
+- `house-bathroom-02.webp`
+- `floor-basement.webp`, `floor-1.webp`, `floor-2.webp`, `floor-upper.webp`
+- `location-shops-01.webp`, `location-shops-02.webp`, `location-sports-01.webp`
 
 ## Как заменить фотографии
 
-1. Положите WebP (или замените расширение в конфиге) в папку выше.
-2. В `src/config/property.ts` у нужного кадра поставьте `available: true`.
+1. Положите файл в нужную папку с именем из конфига.
+2. В `src/config/property.ts` у кадра поставьте `available: true`.
 3. При необходимости поправьте `alt`, `width` и `height`.
 
-Пока `available: false`, на сайте показывается нейтральный placeholder. Чужие и AI-фотографии дома не используются.
+Пока файла нет, на сайте показывается нейтральный placeholder. Чужие и AI-фотографии дома не используются.
 
 ## Цена
 

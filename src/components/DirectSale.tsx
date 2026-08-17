@@ -13,6 +13,11 @@ export function DirectSale() {
           Без посредников и комиссии агентства. Можно напрямую задать вопросы по
           дому и договориться о просмотре.
         </p>
+        <ul className="plain-list sale-terms">
+          {property.saleTerms.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
         <p className="owner-name">{property.ownerName}</p>
         <PhoneLink className="owner-phone">{property.phone}</PhoneLink>
         {property.price !== null ? (

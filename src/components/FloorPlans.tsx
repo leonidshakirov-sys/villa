@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { property } from "@/config/property";
+import { isImageReady, property } from "@/config/property";
 import { Lightbox } from "@/components/Lightbox";
 import { Photo } from "@/components/Photo";
 import { SectionTrack } from "@/components/SectionTrack";
@@ -17,8 +17,8 @@ export function FloorPlans() {
             <p className="eyebrow">Планировки</p>
             <h2>Четыре этажа — много пространства для жизни</h2>
             <p className="section-lead">
-              Планы этажей можно открыть крупнее. Если изображение ещё не
-              загружено, здесь остаётся место под него.
+              Цокольный, первый, второй и верхний этажи. Планы открываются
+              крупнее.
             </p>
           </div>
           <div className="plans-grid">
@@ -35,7 +35,7 @@ export function FloorPlans() {
                   alt={plan.alt}
                   width={plan.width}
                   height={plan.height}
-                  available={plan.available}
+                  available={isImageReady(plan)}
                   label={plan.title}
                   sizes="(max-width: 768px) 100vw, 25vw"
                 />
@@ -50,7 +50,7 @@ export function FloorPlans() {
             alt: plan.alt,
             width: plan.width,
             height: plan.height,
-            available: plan.available,
+            available: isImageReady(plan),
             label: plan.title,
           }))}
           index={index}
