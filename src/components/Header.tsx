@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import Link from "next/link";
 import { property } from "@/config/property";
 import { PhoneLink } from "@/components/PhoneLink";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -32,9 +33,9 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <a className="logo" href="/">
+        <Link className="logo" href="/">
           Дом в Житнево
-        </a>
+        </Link>
 
         <nav className="header-nav" aria-label="Основная навигация">
           {nav.map((item) => (

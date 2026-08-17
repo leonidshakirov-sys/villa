@@ -1,20 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { property } from "@/config/property";
 
 const STORAGE_KEY = "zhitnevo-cookie-notice";
+const listeners = new Set<() => void>();
+
+function emit() {
+  listeners.forEach((listener) => listener());
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function getSnapshot() {
+  if (!property.yandexMetrikaId) return false;
+  return window.localStorage.getItem(STORAGE_KEY) !== "1";
+}
 
 export function CookieNotice() {
-  const [visible, setVisible] = useState(false);
+  const visible = useSyncExternalStore(subscribe, getSnapshot, () => false);
 
-  useEffect(() => {
-    if (!property.yandexMetrikaId) return;
-    const seen = window.localStorage.getItem(STORAGE_KEY);
-    if (!seen) setVisible(true);
-  }, []);
-
-  if (!property.yandexMetrikaId || !visible) return null;
+  if (!visible) return null;
 
   return (
     <div className="cookie-notice" role="dialog" aria-label="Уведомление о cookie">
@@ -27,7 +36,7 @@ export function CookieNotice() {
         className="btn btn-primary btn-compact"
         onClick={() => {
           window.localStorage.setItem(STORAGE_KEY, "1");
-          setVisible(false);
+          emit();
         }}
       >
         Понятно

@@ -15,8 +15,8 @@ export default async function OpenGraphImage() {
     property.price !== null ? formatPrice(property.price) : "Продажа от собственника";
 
   const [serif, sans] = await Promise.all([
-    readFile(join(process.cwd(), "src/app/fonts/CormorantGaramond-SemiBold.ttf")),
-    readFile(join(process.cwd(), "src/app/fonts/Manrope-Medium.ttf")),
+    readFile(join(process.cwd(), "src/app/fonts/PTSerif-Bold.ttf")),
+    readFile(join(process.cwd(), "src/app/fonts/PTSans-Regular.ttf")),
   ]);
 
   return new ImageResponse(
