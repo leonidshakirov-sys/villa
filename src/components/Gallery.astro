@@ -15,7 +15,7 @@ const usedCategories = [...new Set(images.map((image) => image.category))] as Im
       <p class="lead">Реальные кадры объекта. Нажмите на снимок, чтобы открыть его крупно.</p>
     </div>
 
-    <div class="filters" role="tablist" aria-label="Категории фотографий">
+    <div class="filters" role="group" aria-label="Категории фотографий">
       <button type="button" class="filter is-active" data-filter="all" aria-pressed="true">
         Все
       </button>

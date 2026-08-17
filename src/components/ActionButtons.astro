@@ -24,7 +24,7 @@ const waClass = variant === "light" ? "btn btn-light" : "btn btn-olive";
     class={callClass}
     href={getTelUrl()}
     data-analytics="click_phone"
-    aria-label={`Позвонить ${property.ownerName}, ${property.phone}`}
+    aria-label={`Позвонить Леониду, ${property.phone}`}
   >
     {callLabel}
   </a>
@@ -34,7 +34,7 @@ const waClass = variant === "light" ? "btn btn-light" : "btn btn-olive";
     target="_blank"
     rel="noopener noreferrer"
     data-analytics="click_whatsapp"
-    aria-label={`Написать ${property.ownerName} в WhatsApp`}
+    aria-label="Написать Леониду в WhatsApp"
   >
     {whatsappLabel}
   </a>

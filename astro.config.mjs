@@ -7,6 +7,7 @@ const site = process.env.PUBLIC_SITE_URL || "https://zhitnevo-house.ru";
 
 export default defineConfig({
   site,
+  trailingSlash: "never",
   compressHTML: true,
   integrations: [
     sitemap({

@@ -1,9 +1,9 @@
 ---
-import { getTelUrl, getWhatsAppUrl, property } from "../config/property";
+import { getTelUrl, getWhatsAppUrl } from "../config/property";
 ---
 
 <div class="mobile-cta" role="navigation" aria-label="Быстрый контакт">
-  <a class="call" href={getTelUrl()} data-analytics="click_phone" aria-label={`Позвонить ${property.ownerName}`}>
+  <a class="call" href={getTelUrl()} data-analytics="click_phone" aria-label="Позвонить Леониду">
     Позвонить
   </a>
   <a
@@ -12,7 +12,7 @@ import { getTelUrl, getWhatsAppUrl, property } from "../config/property";
     target="_blank"
     rel="noopener noreferrer"
     data-analytics="click_whatsapp"
-    aria-label={`Написать ${property.ownerName} в WhatsApp`}
+    aria-label="Написать Леониду в WhatsApp"
   >
     WhatsApp
   </a>
