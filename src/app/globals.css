@@ -59,6 +59,7 @@ body {
   font-family: var(--font-sans);
   font-size: 1.05rem;
   line-height: 1.65;
+  font-variant-numeric: lining-nums tabular-nums;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -377,11 +378,30 @@ button {
   color: #e8e2d6;
 }
 
+.digits {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-price,
+.direct-price,
+.final-price,
+.about-price,
+.stat-value,
+.owner-price {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
 .hero-price,
 .direct-price,
 .final-price {
   margin-top: var(--space-4);
-  font-family: var(--font-serif);
   font-size: clamp(1.8rem, 3vw, 2.6rem);
 }
 
@@ -435,7 +455,6 @@ button {
 }
 
 .stat-value {
-  font-family: var(--font-serif);
   font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
@@ -534,7 +553,6 @@ button {
 
 .about-price {
   margin-top: var(--space-4);
-  font-family: var(--font-serif);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
 }
 

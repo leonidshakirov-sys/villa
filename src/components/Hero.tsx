@@ -38,8 +38,9 @@ export function Hero() {
       <div className="container hero-content">
         <p className="eyebrow">Продажа от собственника • Житнево</p>
         <h1 className="hero-title">
-          Дом в Житнево — {formatNumber(property.area)} м² на участке{" "}
-          {formatNumber(property.landArea)} соток
+          Дом в Житнево — <span className="digits">{formatNumber(property.area)}</span>{" "}
+          м² на участке <span className="digits">{formatNumber(property.landArea)}</span>{" "}
+          соток
         </h1>
         <p className="hero-lead">
           Просторный загородный дом после полной реконструкции 2021 года. Жить за
