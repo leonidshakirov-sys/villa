@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { isImageReady, property } from "@/config/property";
+import { getAvailableImages, isImageReady } from "@/config/property";
 import { Lightbox } from "@/components/Lightbox";
 import { Photo } from "@/components/Photo";
 import { track } from "@/lib/analytics";
 
 export function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
-  const photos = property.images;
+  const photos = getAvailableImages();
   const featured = photos.slice(0, 5);
 
   const open = (nextIndex: number) => {

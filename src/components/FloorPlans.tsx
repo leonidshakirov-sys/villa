@@ -52,6 +52,7 @@ export function FloorPlans() {
             height: plan.height,
             available: isImageReady(plan),
             label: plan.title,
+            objectFit: "contain" as const,
           }))}
           index={index}
           onClose={() => setIndex(null)}

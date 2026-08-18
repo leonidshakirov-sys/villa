@@ -30,44 +30,14 @@ npm start
 
 `public/images/location/`
 
-Рекомендуемые имена файлов уже прописаны в `src/config/property.ts`:
+Фотографии объекта уже лежат в этих папках и подключены в `src/config/property.ts` (`available: true`).
 
-- `house-exterior-01.webp`
-- `house-exterior-02.webp`
-- `house-facade-01.webp`
-- `house-yard-01.webp`
-- `house-yard-02.webp`
-- `house-veranda-01.webp`
-- `house-interior-01.webp`
-- `house-interior-02.webp`
-- `house-stairs-01.webp`
-- `house-floors-01.webp`
-- `house-garage-01.webp`
-- `house-sauna-01.webp`
-- `house-surroundings-01.webp`
-- `house-kitchen-01.webp`
-- `house-bathroom-01.webp`
-- `house-bathroom-02.webp`
-- `house-living-01.webp`
-- `house-bedroom-01.webp`
-- `house-bedroom-02.webp`
-- `house-hallway-01.webp`
-- `house-stairs-02.webp`
-- `house-boiler-01.webp`
-- `house-laundry-01.webp`
-- `house-cinema-01.webp`
-- `house-wardrobe-01.webp`
-- `house-recreation-01.webp`
-- `floor-basement.webp`, `floor-1.webp`, `floor-2.webp`, `floor-upper.webp`
-- `location-shops-01.webp`, `location-shops-02.webp`, `location-sports-01.webp`
+Чтобы заменить кадр:
 
-## Как заменить фотографии
+1. Положите файл в ту же папку с тем же именем.
+2. При необходимости поправьте `alt`, `width` и `height` в конфиге.
 
-1. Положите файл в нужную папку с именем из конфига.
-2. В `src/config/property.ts` у кадра поставьте `available: true`.
-3. При необходимости поправьте `alt`, `width` и `height`.
-
-Пока файла нет, на сайте показывается нейтральный placeholder. Чужие и AI-фотографии дома не используются.
+Чужие и AI-фотографии дома не используются. Placeholder показывается только если у кадра `available: false`.
 
 ## Цена
 

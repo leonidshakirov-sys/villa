@@ -11,6 +11,7 @@ export type LightboxItem = {
   height: number;
   available: boolean;
   label?: string;
+  objectFit?: "cover" | "contain";
 };
 
 type LightboxProps = {
@@ -116,7 +117,11 @@ export function Lightbox({ items, index, onClose, onIndexChange }: LightboxProps
             available={item.available}
             label={item.label}
             sizes="100vw"
-            className="lightbox-image"
+            className={
+              item.objectFit === "contain"
+                ? "lightbox-image lightbox-image-contain"
+                : "lightbox-image"
+            }
           />
           <button
             type="button"

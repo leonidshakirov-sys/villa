@@ -7,7 +7,7 @@ import { Photo } from "@/components/Photo";
 
 export function Nearby() {
   const [index, setIndex] = useState<number | null>(null);
-  const photos = property.locationImages;
+  const photos = property.locationImages.filter((image) => isImageReady(image));
 
   return (
     <section className="section nearby" id="nearby">
