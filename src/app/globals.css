@@ -322,24 +322,27 @@ button {
 
 .hero {
   position: relative;
-  min-height: calc(100svh - var(--header-h));
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   color: var(--color-milk);
   background: var(--color-hero);
 }
 
 .hero-media,
 .final-cta-media {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1448 / 1086;
+  background: var(--color-hero);
 }
 
 .hero-image,
 .final-cta-image,
 .hero-fallback {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero-fallback {
@@ -362,8 +365,12 @@ button {
 }
 
 .hero-content {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
+  margin-inline: auto;
   padding: var(--space-8) 0 var(--space-6);
 }
 
@@ -720,16 +727,18 @@ button {
 
 .final-cta {
   position: relative;
-  min-height: 72vh;
-  display: grid;
-  align-items: end;
+  min-height: 0;
   color: var(--color-milk);
   background: var(--color-hero);
 }
 
 .final-cta-content {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
+  margin-inline: auto;
   padding: var(--space-8) 0;
 }
 

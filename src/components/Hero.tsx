@@ -16,7 +16,7 @@ export function Hero() {
 
   return (
     <section className="hero" aria-label="Главный экран">
-      <div className="hero-media" aria-hidden={heroImage ? undefined : true}>
+      <div className="hero-media">
         {heroImage ? (
           <Photo
             src={heroImage.src}
@@ -33,35 +33,34 @@ export function Hero() {
           <div className="hero-fallback" />
         )}
         <div className="hero-overlay" />
-      </div>
-
-      <div className="container hero-content">
-        <p className="eyebrow">Продажа от собственника • Житнево</p>
-        <h1 className="hero-title">
-          Дом в Житнево — <span className="digits">{formatNumber(property.area)}</span>{" "}
-          м² на участке <span className="digits">{formatNumber(property.landArea)}</span>{" "}
-          соток
-        </h1>
-        <p className="hero-lead">
-          Просторный загородный дом после полной реконструкции 2021 года. Жить за
-          городом с комфортом городской квартиры, большим пространством и своей
-          территорией. Около 35 км от МКАД.
-        </p>
-        {property.price !== null ? (
-          <p className="hero-price">{formatPrice(property.price)}</p>
-        ) : null}
-        <div className="hero-owner">
-          <p>
-            {property.ownerName} — {property.ownerRole}
+        <div className="container hero-content">
+          <p className="eyebrow">Продажа от собственника • Житнево</p>
+          <h1 className="hero-title">
+            Дом в Житнево — <span className="digits">{formatNumber(property.area)}</span>{" "}
+            м² на участке <span className="digits">{formatNumber(property.landArea)}</span>{" "}
+            соток
+          </h1>
+          <p className="hero-lead">
+            Просторный загородный дом после полной реконструкции 2021 года. Жить за
+            городом с комфортом городской квартиры, большим пространством и своей
+            территорией. Около 35 км от МКАД.
           </p>
-          <PhoneLink className="hero-phone">{property.phone}</PhoneLink>
-        </div>
-        <CtaButtons />
-        <p className="hero-note">Продажа напрямую от собственника.</p>
-        <div className="hero-links">
-          <a href="#gallery">Посмотреть фотографии</a>
-          <a href="#specs">Посмотреть характеристики</a>
-          <a href="#location">Посмотреть расположение</a>
+          {property.price !== null ? (
+            <p className="hero-price">{formatPrice(property.price)}</p>
+          ) : null}
+          <div className="hero-owner">
+            <p>
+              {property.ownerName} — {property.ownerRole}
+            </p>
+            <PhoneLink className="hero-phone">{property.phone}</PhoneLink>
+          </div>
+          <CtaButtons />
+          <p className="hero-note">Продажа напрямую от собственника.</p>
+          <div className="hero-links">
+            <a href="#gallery">Посмотреть фотографии</a>
+            <a href="#specs">Посмотреть характеристики</a>
+            <a href="#location">Посмотреть расположение</a>
+          </div>
         </div>
       </div>
 

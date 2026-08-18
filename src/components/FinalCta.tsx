@@ -25,22 +25,22 @@ export function FinalCta() {
           <div className="hero-fallback" />
         )}
         <div className="hero-overlay" />
-      </div>
-      <div className="container final-cta-content">
-        <p className="eyebrow light">Просмотр</p>
-        <h2>Лучше один раз увидеть</h2>
-        <p className="final-lead">
-          Масштаб комнат, веранду и участок лучше оценить на месте. Позвоните
-          Леониду и договоритесь о просмотре дома в Житнево.
-        </p>
-        <p className="owner-name light">
-          {property.ownerName} — {property.ownerRole}
-        </p>
-        <PhoneLink className="final-phone">{property.phone}</PhoneLink>
-        {property.price !== null ? (
-          <p className="final-price">{formatPrice(property.price)}</p>
-        ) : null}
-        <CtaButtons phoneLabel="Позвонить" whatsappLabel="WhatsApp" />
+        <div className="container final-cta-content">
+          <p className="eyebrow light">Просмотр</p>
+          <h2>Лучше один раз увидеть</h2>
+          <p className="final-lead">
+            Масштаб комнат, веранду и участок лучше оценить на месте. Позвоните
+            Леониду и договоритесь о просмотре дома в Житнево.
+          </p>
+          <p className="owner-name light">
+            {property.ownerName} — {property.ownerRole}
+          </p>
+          <PhoneLink className="final-phone">{property.phone}</PhoneLink>
+          {property.price !== null ? (
+            <p className="final-price">{formatPrice(property.price)}</p>
+          ) : null}
+          <CtaButtons phoneLabel="Позвонить" whatsappLabel="WhatsApp" />
+        </div>
       </div>
     </section>
   );

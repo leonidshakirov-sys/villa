@@ -116,11 +116,11 @@ export const property = {
     {
       id: "exterior-01",
       src: "/images/house/house-exterior-01.webp",
-      alt: "Дом в Житнево со стороны участка, Домодедовский городской округ",
+      alt: "Дом в Житнево со стороны участка, грядки и сад",
       category: "exterior",
       categoryLabel: "Вид дома",
-      width: 1920,
-      height: 1440,
+      width: 1448,
+      height: 1086,
       available: true,
     },
     {
