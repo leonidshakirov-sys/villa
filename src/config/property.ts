@@ -60,7 +60,7 @@ export const property = {
     "Здравствуйте, Леонид! Пишу по поводу дома в Житнево. Хотел бы узнать подробности.",
 
   // Публичный URL сайта (canonical, sitemap, Open Graph).
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://zhitnevo-house.ru",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://domvzhitnevo.ru",
 
   // Если пусто — meta verification не выводится.
   yandexWebmasterVerification:
