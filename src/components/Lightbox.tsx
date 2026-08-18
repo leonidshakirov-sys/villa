@@ -117,11 +117,7 @@ export function Lightbox({ items, index, onClose, onIndexChange }: LightboxProps
             available={item.available}
             label={item.label}
             sizes="100vw"
-            className={
-              item.objectFit === "contain"
-                ? "lightbox-image lightbox-image-contain"
-                : "lightbox-image"
-            }
+            className="lightbox-image lightbox-image-contain"
           />
           <button
             type="button"

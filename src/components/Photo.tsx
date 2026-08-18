@@ -41,7 +41,7 @@ export function Photo({
   if (fill) {
     return (
       <Image
-        className={className}
+        className={`${className} ${height > width ? "is-portrait" : "is-landscape"}`.trim()}
         src={src}
         alt={alt}
         fill
@@ -53,7 +53,7 @@ export function Photo({
 
   return (
     <Image
-      className={className}
+      className={`${className} ${height > width ? "is-portrait" : "is-landscape"}`.trim()}
       src={src}
       alt={alt}
       width={width}
