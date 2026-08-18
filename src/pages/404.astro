@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { property } from "../config/property";
+---
+
+<BaseLayout
+  title={`Страница не найдена — ${property.title}`}
+  description="Запрашиваемая страница не найдена. Вернитесь к описанию дома в Житнево."
+  canonicalPath="/"
+  noindex
+>
+  <main class="page" id="main">
+    <p class="eyebrow">404</p>
+    <h1>Страница не найдена</h1>
+    <p>Такой страницы нет. Можно вернуться к дому в Житнево.</p>
+    <a class="btn btn-primary" href="/">Вернуться к дому</a>
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    display: grid;
+    gap: 1rem;
+    align-content: center;
+    min-height: 100svh;
+    width: min(calc(100% - 2rem), 36rem);
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: var(--text-4xl);
+  }
+
+  p {
+    color: var(--color-stone);
+  }
+</style>

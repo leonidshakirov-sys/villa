@@ -1,0 +1,45 @@
+<script>
+  type AnalyticsEvent =
+    | "click_phone"
+    | "click_whatsapp"
+    | "open_gallery"
+    | "view_location"
+    | "view_floorplans"
+    | "gallery_next"
+    | "gallery_previous";
+
+  function track(event: AnalyticsEvent, params?: Record<string, unknown>) {
+    const id = window.__METRIKA_ID__;
+    if (id && typeof window.ym === "function") {
+      window.ym(Number(id), "reachGoal", event, params);
+    }
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-analytics]");
+    if (!target) return;
+    const name = target.dataset.analytics as AnalyticsEvent | undefined;
+    if (name) track(name);
+  });
+
+  const once = new Set<string>();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const name = (entry.target as HTMLElement).dataset.viewAnalytics as AnalyticsEvent | undefined;
+        if (!name || once.has(name)) continue;
+        once.add(name);
+        track(name);
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.35 },
+  );
+
+  document.querySelectorAll<HTMLElement>("[data-view-analytics]").forEach((node) => observer.observe(node));
+
+  window.addEventListener("zhitnevo:analytics", ((event: CustomEvent<{ name: AnalyticsEvent }>) => {
+    if (event.detail?.name) track(event.detail.name);
+  }) as EventListener);
+</script>

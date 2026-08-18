@@ -1,0 +1,87 @@
+---
+import { getTelUrl, property } from "../config/property";
+import { currentYear } from "../lib/format";
+
+const year = currentYear();
+const links = [
+  { href: "/#about", label: "О доме" },
+  { href: "/#gallery", label: "Фотографии" },
+  { href: "/#specs", label: "Характеристики" },
+  { href: "/#location", label: "Расположение" },
+  { href: "/privacy", label: "Политика конфиденциальности" },
+];
+---
+
+<footer class="footer">
+  <div class="container-wide grid">
+    <div>
+      <p class="title">{property.title}</p>
+      <p>Продажа от собственника</p>
+      <p>{property.ownerName}</p>
+      <a class="phone-link" href={getTelUrl()} data-analytics="click_phone">{property.phone}</a>
+    </div>
+    <nav aria-label="Навигация в подвале">
+      {
+        links.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))
+      }
+    </nav>
+  </div>
+  <p class="copy container-wide">© {year} {property.title}</p>
+</footer>
+
+<style>
+  .footer {
+    padding: var(--space-7) 0 calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--color-line);
+    background: var(--color-milk);
+    color: var(--color-stone);
+  }
+
+  .grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .title {
+    margin-bottom: 0.4rem;
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+  }
+
+  nav {
+    display: grid;
+    gap: 0.45rem;
+    align-content: start;
+  }
+
+  nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--color-olive);
+  }
+
+  .copy {
+    margin-top: var(--space-6);
+    font-size: 0.88rem;
+  }
+
+  @media (min-width: 800px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .footer {
+      padding-bottom: calc(var(--space-6) + var(--mobile-cta-h) + env(safe-area-inset-bottom, 0px));
+    }
+  }
+</style>

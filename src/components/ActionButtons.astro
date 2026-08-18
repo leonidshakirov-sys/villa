@@ -1,0 +1,41 @@
+---
+import { getTelUrl, getWhatsAppUrl, property } from "../config/property";
+
+interface Props {
+  variant?: "dark" | "light";
+  callLabel?: string;
+  whatsappLabel?: string;
+  class?: string;
+}
+
+const {
+  variant = "dark",
+  callLabel = "Позвонить Леониду",
+  whatsappLabel = "Написать в WhatsApp",
+  class: className = "",
+} = Astro.props;
+
+const callClass = variant === "light" ? "btn btn-light-solid" : "btn btn-primary";
+const waClass = variant === "light" ? "btn btn-light" : "btn btn-olive";
+---
+
+<div class:list={["actions", className]}>
+  <a
+    class={callClass}
+    href={getTelUrl()}
+    data-analytics="click_phone"
+    aria-label={`Позвонить Леониду, ${property.phone}`}
+  >
+    {callLabel}
+  </a>
+  <a
+    class={waClass}
+    href={getWhatsAppUrl()}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-analytics="click_whatsapp"
+    aria-label="Написать Леониду в WhatsApp"
+  >
+    {whatsappLabel}
+  </a>
+</div>

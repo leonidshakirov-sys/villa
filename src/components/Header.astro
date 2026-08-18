@@ -1,0 +1,220 @@
+---
+import { getTelUrl, property } from "../config/property";
+
+const links = [
+  { href: "/#about", label: "О доме" },
+  { href: "/#gallery", label: "Фотографии" },
+  { href: "/#specs", label: "Характеристики" },
+  { href: "/#location", label: "Расположение" },
+];
+---
+
+<header class="header" id="site-header">
+  <div class="header-bar container-wide">
+    <a class="logo" href="/">{property.title}</a>
+
+    <nav class="nav" aria-label="Основная навигация">
+      {
+        links.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))
+      }
+    </nav>
+
+    <div class="header-actions">
+      <a class="phone-link header-phone" href={getTelUrl()} data-analytics="click_phone">
+        {property.phone}
+      </a>
+      <a class="btn btn-primary header-call" href={getTelUrl()} data-analytics="click_phone">
+        Позвонить
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        data-menu-toggle
+      >
+        <span class="visually-hidden">Открыть меню</span>
+        <span class="menu-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <nav aria-label="Мобильная навигация">
+      {
+        links.map((link) => (
+          <a href={link.href} data-menu-link>
+            {link.label}
+          </a>
+        ))
+      }
+      <a class="phone-link" href={getTelUrl()} data-analytics="click_phone">{property.phone}</a>
+      <a class="btn btn-primary" href={getTelUrl()} data-analytics="click_phone">Позвонить</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.getElementById("mobile-nav");
+
+  const onScroll = () => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    menu.hidden = !open;
+    document.body.classList.toggle("menu-open", open);
+  };
+
+  toggle?.addEventListener("click", () => {
+    setOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+
+  menu?.querySelectorAll("[data-menu-link]").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(251, 247, 240, 0.86);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+  }
+
+  .header.is-scrolled {
+    border-bottom-color: var(--color-line);
+  }
+
+  .header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--header-h);
+    gap: 1rem;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav {
+    display: none;
+    gap: 1.5rem;
+  }
+
+  .nav a {
+    color: var(--color-graphite);
+    font-size: 0.92rem;
+    text-decoration: none;
+  }
+
+  .nav a:hover {
+    color: var(--color-olive);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .header-phone {
+    display: none;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .header-call {
+    display: none;
+    min-height: 44px;
+    padding-inline: 1.1rem;
+  }
+
+  .menu-toggle {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    background: transparent;
+  }
+
+  .menu-lines,
+  .menu-lines::before,
+  .menu-lines::after {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    margin-inline: auto;
+    background: var(--color-graphite);
+    content: "";
+  }
+
+  .menu-lines::before {
+    transform: translateY(-5px);
+  }
+
+  .menu-lines::after {
+    transform: translateY(3.5px);
+  }
+
+  .mobile-nav {
+    padding: 0 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-cream);
+  }
+
+  .mobile-nav nav {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .mobile-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: none;
+  }
+
+  .mobile-nav[hidden] {
+    display: none;
+  }
+
+  :global(body.menu-open) {
+    overflow: hidden;
+  }
+
+  @media (min-width: 900px) {
+    .nav,
+    .header-phone,
+    .header-call {
+      display: flex;
+    }
+
+    .menu-toggle,
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>

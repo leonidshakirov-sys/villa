@@ -1,0 +1,91 @@
+---
+const items = [
+  {
+    title: "281,5 м² пространства",
+    text: "Большая площадь позволяет организовать пространство для семьи, гостей, работы и отдыха.",
+  },
+  {
+    title: "Участок 11,86 сотки",
+    text: "Достаточно места для благоустройства территории и создания собственных зон отдыха.",
+  },
+  {
+    title: "Четыре этажа",
+    text: "Можно функционально разделить пространство дома на разные зоны.",
+  },
+  {
+    title: "Центральные коммуникации",
+    text: "Важное преимущество для постоянного проживания.",
+  },
+  {
+    title: "Дом 2021 года",
+    text: "Современный капитальный объект.",
+  },
+  {
+    title: "Собственный гараж",
+    text: "Есть отдельное пространство под автомобиль и хозяйственные задачи.",
+  },
+  {
+    title: "Помещение под сауну",
+    text: "Будущий владелец сможет завершить его под собственный проект.",
+  },
+  {
+    title: "Около 35 км от МКАД",
+    text: "Дом расположен относительно недалеко от Москвы.",
+  },
+];
+---
+
+<section class="section advantages" aria-labelledby="advantages-title">
+  <div class="container">
+    <p class="eyebrow">Почему этот объект</p>
+    <h2 id="advantages-title">Что делает этот дом интересным</h2>
+    <ul>
+      {
+        items.map((item) => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  h2 {
+    max-width: 16ch;
+    margin-bottom: var(--space-6);
+    font-size: var(--text-4xl);
+  }
+
+  ul {
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  h3 {
+    margin-bottom: 0.45rem;
+    font-size: var(--text-2xl);
+  }
+
+  p {
+    max-width: 36rem;
+    color: var(--color-stone);
+  }
+
+  @media (min-width: 800px) {
+    ul {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 3rem;
+    }
+  }
+</style>

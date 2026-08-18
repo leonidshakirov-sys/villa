@@ -1,0 +1,162 @@
+---
+import ActionButtons from "./ActionButtons.astro";
+import PropertyImage from "./PropertyImage.astro";
+import { getHeroImage, getTelUrl, property } from "../config/property";
+import { publicFileExists } from "../lib/files";
+import { formatPrice } from "../lib/format";
+
+const image = getHeroImage();
+const hasPhoto = publicFileExists(image.src);
+const price = typeof property.price === "number" ? formatPrice(property.price) : null;
+---
+
+<section class:list={["hero", hasPhoto && "has-photo"]} aria-labelledby="hero-title">
+  {
+    hasPhoto && (
+      <div class="hero-media" aria-hidden="true">
+        <PropertyImage image={image} priority sizes="100vw" />
+      </div>
+    )
+  }
+
+  <div class="container hero-content">
+    <p class="eyebrow">Продажа от собственника • Житнево</p>
+    <h1 id="hero-title">{property.h1}</h1>
+    <p class="hero-lead">
+      Просторный 4-этажный дом в Домодедовском городском округе. Центральные коммуникации.
+      Около 35 км от МКАД.
+    </p>
+    {
+      price && (
+        <p class="price" aria-label={`Цена ${price}`}>
+          {price}
+        </p>
+      )
+    }
+    <div class="hero-owner">
+      <p>
+        <strong>{property.ownerName}</strong> — {property.ownerRole}
+      </p>
+      <a class="phone-link hero-phone" href={getTelUrl()} data-analytics="click_phone">
+        {property.phone}
+      </a>
+    </div>
+    <ActionButtons variant={hasPhoto ? "light" : "dark"} />
+    <p class="hero-note">Продажа напрямую от собственника.</p>
+    <div class="hero-jump">
+      <a href="#gallery">Посмотреть фотографии</a>
+      <a href="#specs">Посмотреть характеристики</a>
+      <a href="#location">Посмотреть расположение</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: calc(100svh - var(--header-h));
+    padding: var(--space-8) 0 var(--space-7);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 12% 20%, rgba(61, 74, 56, 0.08), transparent 28%),
+      var(--color-milk);
+  }
+
+  .hero.has-photo {
+    color: var(--color-cream);
+    background: var(--color-ink);
+  }
+
+  .hero-media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-media :global(img),
+  .hero-media :global(.placeholder) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-media::after {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(27, 26, 23, 0.18) 0%, rgba(27, 26, 23, 0.62) 72%),
+      linear-gradient(90deg, rgba(27, 26, 23, 0.28), transparent 55%);
+    content: "";
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.15rem;
+    max-width: 46rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: min(calc(100% - 2rem), 72rem);
+  }
+
+  h1 {
+    max-width: 16ch;
+    font-size: var(--text-5xl);
+  }
+
+  .hero.has-photo h1,
+  .hero.has-photo .price,
+  .hero.has-photo .hero-phone {
+    color: var(--color-cream);
+  }
+
+  .hero.has-photo .eyebrow,
+  .hero.has-photo .hero-lead,
+  .hero.has-photo .hero-note,
+  .hero.has-photo .hero-owner,
+  .hero.has-photo .hero-jump a {
+    color: rgba(251, 247, 240, 0.86);
+  }
+
+  .hero-lead {
+    max-width: 36rem;
+    font-size: var(--text-lg);
+    color: var(--color-stone);
+  }
+
+  .hero-owner {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .hero-phone {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-note {
+    color: var(--color-stone);
+    font-size: 0.95rem;
+  }
+
+  .hero-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem 1.25rem;
+    padding-top: 0.35rem;
+  }
+
+  .hero-jump a {
+    color: var(--color-olive);
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 900px) {
+    .hero-content {
+      margin-left: max(1rem, calc((100% - var(--wide)) / 2 + 1rem));
+    }
+  }
+</style>

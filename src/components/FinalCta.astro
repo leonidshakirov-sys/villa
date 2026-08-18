@@ -1,0 +1,94 @@
+---
+import ActionButtons from "./ActionButtons.astro";
+import PropertyImage from "./PropertyImage.astro";
+import { getFinalCtaImage, getTelUrl, property } from "../config/property";
+import { publicFileExists } from "../lib/files";
+import { formatPrice } from "../lib/format";
+
+const image = getFinalCtaImage();
+const hasPhoto = publicFileExists(image.src);
+const price = typeof property.price === "number" ? formatPrice(property.price) : null;
+---
+
+<section class:list={["final", hasPhoto && "has-photo"]} aria-labelledby="final-title">
+  {
+    hasPhoto && (
+      <div class="media" aria-hidden="true">
+        <PropertyImage image={image} sizes="100vw" />
+      </div>
+    )
+  }
+  <div class="container content">
+    <p class="eyebrow">Просмотр</p>
+    <h2 id="final-title">Лучше один раз увидеть</h2>
+    <p class="lead">Позвоните Леониду и договоритесь о просмотре дома в Житнево.</p>
+    <p class="who">{property.ownerName} — {property.ownerRole}</p>
+    <a class="phone-link phone" href={getTelUrl()} data-analytics="click_phone">{property.phone}</a>
+    {price && <p class="price">{price}</p>}
+    <ActionButtons variant={hasPhoto ? "light" : "dark"} callLabel="Позвонить" whatsappLabel="WhatsApp" />
+  </div>
+</section>
+
+<style>
+  .final {
+    position: relative;
+    padding: var(--space-9) 0;
+    overflow: hidden;
+    background: var(--color-olive);
+    color: var(--color-cream);
+  }
+
+  .final.has-photo {
+    background: var(--color-ink);
+  }
+
+  .media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .media :global(img),
+  .media :global(.placeholder) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(27, 26, 23, 0.28), rgba(27, 26, 23, 0.72));
+    content: "";
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .eyebrow,
+  .lead,
+  .who {
+    color: rgba(251, 247, 240, 0.82);
+  }
+
+  h2,
+  .phone,
+  .price {
+    color: var(--color-cream);
+  }
+
+  h2 {
+    max-width: 12ch;
+    font-size: var(--text-5xl);
+  }
+
+  .phone {
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/manrope/400.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
+import Analytics from "../components/Analytics.astro";
+import CookieNotice from "../components/CookieNotice.astro";
+import JsonLd from "../components/JsonLd.astro";
+import Metrika from "../components/Metrika.astro";
+import { getOgImage, property } from "../config/property";
+import { getSiteUrl, hasWebmasterVerification, site } from "../config/site";
+import { publicFileExists } from "../lib/files";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = property.seoTitle,
+  description = property.seoDescription,
+  canonicalPath = Astro.url.pathname,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = getSiteUrl();
+const canonical = new URL(canonicalPath === "/" ? "/" : canonicalPath, `${siteUrl}/`).href;
+const ogImage = getOgImage();
+const ogExists = publicFileExists(ogImage.src);
+const ogPath = ogExists ? ogImage.src : "/og-image.svg";
+const ogUrl = new URL(ogPath, siteUrl).href;
+const pageTitle = title;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? "noindex,follow" : "index,follow"} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f4efe6" />
+    <meta name="format-detection" content="telephone=yes" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:site_name" content={property.title} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:alt" content={ogImage.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+    {hasWebmasterVerification() && (
+      <meta name="yandex-verification" content={site.yandexWebmasterVerification} />
+    )}
+    <JsonLd />
+    <Metrika />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Перейти к содержимому</a>
+    <slot />
+    <CookieNotice />
+    <Analytics />
+  </body>
+</html>

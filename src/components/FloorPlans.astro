@@ -1,0 +1,226 @@
+---
+import { property } from "../config/property";
+import { publicFileExists } from "../lib/files";
+---
+
+<section class="section plans" id="plans" data-view-analytics="view_floorplans" aria-labelledby="plans-title">
+  <div class="container">
+    <p class="eyebrow">Планировки</p>
+    <h2 id="plans-title">Четыре этажа — много пространства для жизни</h2>
+    <p class="lead">
+      Планы этажей можно открыть крупно. Если изображение еще не загружено, на его месте — понятный слот для файла.
+    </p>
+    <div class="grid">
+      {
+        property.floorPlans.map((plan, index) => {
+          const exists = publicFileExists(plan.src);
+          const fileName = plan.src.split("/").pop();
+          return (
+            <button
+              class="plan"
+              type="button"
+              data-open-plan={index}
+              aria-label={`Открыть планировку: ${plan.label}`}
+            >
+              <span class="label">{plan.label}</span>
+              {exists ? (
+                <img src={plan.src} alt={plan.alt} width={plan.width} height={plan.height} loading="lazy" />
+              ) : (
+                <span class="placeholder" role="img" aria-label={`${plan.alt}. Планировка будет добавлена.`}>
+                  <span class="placeholder-inner">
+                    <span class="placeholder-title">{plan.label}</span>
+                    <span class="placeholder-hint">Загрузите {fileName}</span>
+                  </span>
+                </span>
+              )}
+            </button>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <dialog class="lightbox" id="plans-lightbox" aria-label="Планировки этажей">
+    <div class="lightbox-bar">
+      <p data-plan-counter>1 / {property.floorPlans.length}</p>
+      <button type="button" class="icon-btn" data-plan-close aria-label="Закрыть планировку">Закрыть</button>
+    </div>
+    <div class="stage">
+      <button type="button" class="nav-btn" data-plan-prev aria-label="Предыдущий этаж">‹</button>
+      <div>
+        {
+          property.floorPlans.map((plan, index) => {
+            const exists = publicFileExists(plan.src);
+            return (
+              <figure class="slide" data-plan-slide={index} hidden={index !== 0}>
+                {exists ? (
+                  <img src={plan.src} alt={plan.alt} width={plan.width} height={plan.height} />
+                ) : (
+                  <div class="placeholder">
+                    <div class="placeholder-inner">
+                      <div class="placeholder-title">{plan.label}</div>
+                      <div class="placeholder-hint">{plan.alt}</div>
+                    </div>
+                  </div>
+                )}
+                <figcaption>{plan.alt}</figcaption>
+              </figure>
+            );
+          })
+        }
+      </div>
+      <button type="button" class="nav-btn" data-plan-next aria-label="Следующий этаж">›</button>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  const dialog = document.getElementById("plans-lightbox") as HTMLDialogElement | null;
+  const slides = document.querySelectorAll<HTMLElement>("[data-plan-slide]");
+  const counter = document.querySelector("[data-plan-counter]");
+  let index = 0;
+  let startX = 0;
+
+  const show = (next: number) => {
+    index = (next + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      slide.hidden = i !== index;
+    });
+    if (counter) counter.textContent = `${index + 1} / ${slides.length}`;
+  };
+
+  document.querySelectorAll<HTMLElement>("[data-open-plan]").forEach((button) => {
+    button.addEventListener("click", () => {
+      show(Number(button.dataset.openPlan || 0));
+      dialog?.showModal();
+    });
+  });
+
+  document.querySelector("[data-plan-close]")?.addEventListener("click", () => dialog?.close());
+  document.querySelector("[data-plan-next]")?.addEventListener("click", () => show(index + 1));
+  document.querySelector("[data-plan-prev]")?.addEventListener("click", () => show(index - 1));
+
+  document.addEventListener("keydown", (event) => {
+    if (!dialog?.open) return;
+    if (event.key === "Escape") dialog.close();
+    if (event.key === "ArrowRight") show(index + 1);
+    if (event.key === "ArrowLeft") show(index - 1);
+  });
+
+  dialog?.addEventListener("touchstart", (event) => {
+    startX = event.changedTouches[0]?.clientX ?? 0;
+  }, { passive: true });
+
+  dialog?.addEventListener("touchend", (event) => {
+    const endX = event.changedTouches[0]?.clientX ?? 0;
+    const delta = endX - startX;
+    if (Math.abs(delta) < 40) return;
+    show(delta < 0 ? index + 1 : index - 1);
+  });
+</script>
+
+<style>
+  h2 {
+    max-width: 16ch;
+    margin-bottom: 0.85rem;
+    font-size: var(--text-4xl);
+  }
+
+  .lead {
+    margin-bottom: var(--space-6);
+  }
+
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .plan {
+    display: grid;
+    gap: 0.7rem;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    text-align: left;
+  }
+
+  .label {
+    font-weight: 600;
+  }
+
+  .plan img,
+  .plan .placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    background: var(--color-paper);
+  }
+
+  .lightbox {
+    width: min(100%, 70rem);
+    max-height: 100vh;
+    margin: auto;
+    padding: 1rem;
+    border: 0;
+    background: rgba(27, 26, 23, 0.94);
+    color: var(--color-cream);
+  }
+
+  .lightbox::backdrop {
+    background: rgba(27, 26, 23, 0.72);
+  }
+
+  .lightbox-bar,
+  .stage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .stage {
+    min-height: 70vh;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .slide img,
+  .slide .placeholder {
+    width: min(70vw, 52rem);
+    max-height: 68vh;
+    object-fit: contain;
+    background: #111;
+  }
+
+  figcaption {
+    margin-top: 0.7rem;
+    text-align: center;
+    color: rgba(251, 247, 240, 0.7);
+  }
+
+  .icon-btn,
+  .nav-btn {
+    min-width: 44px;
+    min-height: 44px;
+    border: 1px solid rgba(251, 247, 240, 0.2);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-cream);
+  }
+
+  @media (min-width: 800px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 699px) {
+    .nav-btn {
+      display: none;
+    }
+  }
+</style>
