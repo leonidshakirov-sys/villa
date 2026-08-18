@@ -35,6 +35,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "64x64" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
     locale: "ru_RU",
@@ -42,11 +46,20 @@ export const metadata: Metadata = {
     siteName: property.title,
     title: property.seo.title,
     description: property.seo.description,
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Дом в Житнево 281,5 м² — продажа от собственника",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: property.seo.title,
     description: property.seo.description,
+    images: ["/opengraph-image.png"],
   },
   ...(property.yandexWebmasterVerification
     ? { verification: { yandex: property.yandexWebmasterVerification } }
