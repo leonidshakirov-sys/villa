@@ -67,7 +67,8 @@ export const property = {
     process.env.NEXT_PUBLIC_YANDEX_WEBMASTER_VERIFICATION || "",
 
   // Если пусто — скрипт Метрики не загружается.
-  yandexMetrikaId: process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || "",
+  yandexMetrikaId:
+    process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || "111727927",
 
   seo: {
     title: "Дом в Житнево 281,5 м² — купить дом от собственника",
